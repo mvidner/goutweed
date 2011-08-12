@@ -1,0 +1,18 @@
+
+import "suse_ifcfg" from "ruby";
+
+any Ifcfg = SuSEIfcfg::Ifcfg; // ruby class
+
+any i = Ifcfg.new(arg1, arg2);
+any j = SuSEIfcfg::Ifcfg.new(arg1, arg2);
+// dot notation: call a method
+// this was a class method
+
+j.startmode=(`auto); // oww
+
+// how much ycp integration do we need?
+// can do glue and existing syntax?
+
+anyway, need at least aliases for namespaces
+or do we? 
+look at libstorage
