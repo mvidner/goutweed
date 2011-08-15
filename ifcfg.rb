@@ -1,24 +1,24 @@
 
+require "forwardable"
+
 module SUSEIfcfg
 
 class Ifcfg
-  # foo for a file named ifcfg-foo
-  attr :ifcfg
+    # foo for a file named ifcfg-foo
+    attr :ifcfg
 
-  # the file representation, dealing with the syntax
-  attr :backend
+    # the file representation, dealing with the syntax
+    attr_accessor :backend
 
+    extend Forwardable
+    def_delegators :@backend, :startmode, :startmode=, :bootproto, :bootproto=
 
-  # TODO, a declaration to forward foo and foo= to backend
-  attr :startmode
-  attr :bootproto
+    def initialize(name)
+        @ifcfg = name
+    end
 
-  def initialize
-
-  end
-
-  def save
-    backend.save
-  end
+    def save
+        backend.save(ifcfg)
+    end
 end
 end #module
