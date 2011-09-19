@@ -25,7 +25,7 @@ class SimpleTest < Test::Unit::TestCase
     def test_simple
         iname = "eth0"
         simple = SUSEIfcfg::Ifcfg.new(iname)
-        simple.backend = DirtyIfcfgBackend.new # clumsy
+        simple.class.backend = DirtyIfcfgBackend.new # clumsy
         simple.startmode = :auto
         simple.bootproto = :dhcp
         simple.save

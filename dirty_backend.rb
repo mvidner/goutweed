@@ -24,6 +24,18 @@ class DirtyIfcfgBackend
       end
   end
 
+  def self.read(ifcfg)
+      instance = new
+      File.open "#{@@base_dir}/ifcfg-#{ifcfg}", "r" do |f|
+          f.each_line do |l|
+              l.chomp!
+              key, value = l.split("=")
+              instance.data[key] = value
+          end
+      end
+      instance
+  end
+
   # a.foo
   #   returns data["FOO"]
   # a.bar_baz = qux
@@ -34,6 +46,9 @@ class DirtyIfcfgBackend
           key = name.to_s.chop.upcase
           value = args[0].to_s
           @data[key] = value
+      elsif args.empty?
+          key = name.to_s.upcase
+          @data[key]
       else
           super(name, *args)
       end
